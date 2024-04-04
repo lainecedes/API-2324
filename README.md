@@ -13,13 +13,8 @@ zowel de gebruikerservaring als de gegenereerde data.
 net zo aantrekkelijk zijn als native mobiele apps. We beginnen met het maken van een server-side gerenderde applicatie
 waarbij we geleidelijk de gebruikerservaring verbeteren met relevante beschikbare web API's.**
 
-## Doelen
+- geen gebruik maken van frameworks zoals React, Vue, Svelte, Angular, etc. 
 
-Na deze cursus zul je:
-
-- In staat zijn om een server-side gerenderde applicatie te maken.
-- In staat zijn om een enerverende gebruikerservaring te creëren.
-- Een breder begrip hebben van het web en zijn mogelijkheden.
 
 ## Opdracht
 
@@ -32,6 +27,27 @@ Voorbeelden:
 - Maak je eigen doom-scroll-app (Instagram/TikTok).
 - Maak je eigen chatapplicatie (WhatsApp/Signal).
 - Een andere app die je zelf leuk vindt...
+
+## concepten
+- Pinterest style app met Rijksmuseum API data
+- Kunst vergelijkings tool met Rijksmuseum data
+- Iets met Spotify, most played albums/songs in een galerij, klik erop en dan speelt ie een random liedje af
+- Dribbble API: Pinterest style app met profiel info portfolio style
+
+
+## Week 1 
+- Overgestapt van tinyhttp naar express js
+- Overgestapt van liquid naar ejs
+- Map reorganisatie zodat Vite ook werkt
+- env in Vite
+- server.js met Rijksmuseum API fetch
+
+
+## Resources
+
+- Om serverside te kunnen renderen maak ik gebruik van [TinyHttp](https://github.com/tinyhttp), maar je kan ook kiezen voor [Express](https://expressjs.com/).
+- Voor templating maak ik gebruik van [LiquidJS](https://liquidjs.com/), maar je kan ook kiezen voor [EJS](https://ejs.co/).
+- Voor build tooling(CSS en JS) maak ik gebruik van [Vite](https://vitejs.dev/).
 
 Voorbeeld content API's die je kan gebruiken:
 
@@ -49,35 +65,5 @@ Voorbeelden van Web API's die je kan gebruiken:
 - [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API)
 - [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 - [Web Share API voor sharen van content binnen de context van de gebruiker](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share)
-- ...
 
 De lijst is eindeloos, laat je vooral inspireren op de overzichtspagina van [MDN](https://developer.mozilla.org/en-US/docs/Web/API).
-
-## Beoordeling
-
-Je zal beoordeeld worden op basis van je code, creativiteit en je gedocumenteerde proces. Om het vak te halen zal je aan
-de 3 criteria hieronder moeten voldoen. Een hoger cijfer kan je halen door verder te gaan dan de basis.
-
-| Tekortkomingen | Criterium                                                                                                                                                                                                                                 | Verbeteringen |
-|:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|
-|                | *Project* - Je app werkt en is online beschikbaar. Daarnaast heb je je concept, technologieen, gebruikte Web API's en proces duidelijk gedocumenteerd in je `README.md`.                                                                  |               |
-|                | *Functionaliteit* - Je hebt minstens een overzicht en een detailpagina. Hoe meer dynamischer je functionaliteit.hoe beter.                                                                                                                |               |
-|                | *Enhancements* - Je laat zien dat je begrijpt hoe het web werkt door meerdere Web API's te gebruiken om een zo aantrekkelijk mogelijke gebruikerservaring neer te zetten. Je gebruikt je eigen creativiteit om iets uniks neer te zetten. |               |
-
-## Planning
-
-| Planning                   | Maandag             | Dinsdag               | Vrijdag                |
-|----------------------------|---------------------|-----------------------|------------------------|
-| Week 1 - Kickoff & concept | Pasen               | Introductie en uitleg | Feedback gesprekken    |
-| Week 2 - The baseline      | College + workshops | Workshops             | Feedback gesprekken    |
-| Week 3 - Enhance           | College + workshops | Workshops             | Feedback gesprekken    |
-| Week 4 - Enhance & wrap up | Individuele vragen  | Individuele vragen    | Beoordelingsgesprekken |
-
-## Resources
-
-- Om serverside te kunnen renderen maak ik gebruik van [TinyHttp](https://github.com/tinyhttp), maar je kan ook kiezen voor [Express](https://expressjs.com/).
-- Voor templating maak ik gebruik van [LiquidJS](https://liquidjs.com/), maar je kan ook kiezen voor [EJS](https://ejs.co/).
-- Voor build tooling(CSS en JS) maak ik gebruik van [Vite](https://vitejs.dev/).
-
-Voel je vrij om je eigen technolgieën te kiezen, zolang je maar kan uitleggen waarom je deze hebt gekozen en zolang
-je geen gebruik maakt van een framework zoals React, Vue, Svelte, Angular, etc. 
