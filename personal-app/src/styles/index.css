@@ -1,0 +1,15 @@
+/* load reset css */
+@import './reset.css';
+@import './typography.css';
+
+body {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1rem;
+  padding: 1rem;
+}
