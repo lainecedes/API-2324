@@ -13,9 +13,9 @@ export default defineConfig({
     minify: false,
     manifest: true,
     emptyOutDir: false,
-    outDir: path.resolve(__dirname, 'personal-app/dist'), // dist directory for the vite build?
+    outDir: path.resolve(__dirname, 'dist'), // dist directory for the vite build?
     rollupOptions: {
-      input: path.resolve(__dirname, 'src/scripts/index.js'),
+      input: path.resolve(__dirname, '/scripts/index.js'),
     },
     define: {
       'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
