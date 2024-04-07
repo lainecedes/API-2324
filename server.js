@@ -11,9 +11,14 @@ const app = express();
 dotenv.config({ path: './.env' });
 
 // Spotify API credentials
-// const CLIENT_ID = process.env.CLIENT_ID;
-// const CLIENT_SECRET = process.env.CLIENT_SECRET;
-// const REDIRECT_URI = process.env.REDIRECT_URI;
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+
+const isLocal = process.env.NODE_ENV === 'development';
+// Define the base URL based on the environment
+const baseUrl = isLocal ? 'http://localhost:3000' : 'https://lainecedes-gallery.vercel.app';
+// Construct the redirect_uri
+const REDIRECT_URI = `${baseUrl}/callback`;
 
 
 // serve static files with express.static
@@ -60,9 +65,9 @@ app.get('/', (req, res) => {
         res.redirect('https://accounts.spotify.com/authorize?' +
           queryString.stringify({
             response_type: 'code',
-            client_id: process.env.CLIENT_ID,
+            client_id: CLIENT_ID,
             scope: scope,
-            redirect_uri: process.env.REDIRECT_URI,
+            redirect_uri: REDIRECT_URI,
             state: state
         }));
     }
@@ -92,12 +97,12 @@ app.get('/callback', function (req, res) {
         method: 'post',
         params: {
           code: code,
-          redirect_uri: process.env.REDIRECT_URI,
+          redirect_uri: REDIRECT_URI,
           grant_type: 'authorization_code'
         },
         headers: {
           'content-type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + Buffer.from(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64')
+          'Authorization': 'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
         }
     };
 
@@ -163,7 +168,7 @@ const refreshAccessToken = (refreshToken) => {
         refresh_token: refreshToken
       },
       headers: {
-        'Authorization': 'Basic ' + Buffer.from(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET).toString('base64')
+        'Authorization': 'Basic ' + Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
       }
   })
     .then(response => {
