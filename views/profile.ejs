@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('partials/head.ejs'); %>
+</head>
+
+<body>
+
+    <!-- userProfileData, tracksData -->
+    <main>
+        <h1>Profile Page</h1>
+        
+        <section>
+            <!-- Second image in array 300x300 px -->
+            <img src="<%= userProfileData.images[1].url %>" alt="Spotify Image">
+            <h2><%= userProfileData.display_name %></h2>
+            <p>@<%= userProfileData.id %></p>
+        </section>
+    </main>
+ <script defer="" src="/scripts/index.js"></script>
+</body>
+</html>
