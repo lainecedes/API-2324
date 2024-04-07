@@ -18,7 +18,7 @@ const isLocal = process.env.NODE_ENV === 'development';
 // Define the base URL based on the environment
 const baseUrl = isLocal ? 'http://localhost:3000' : 'https://lainecedes-gallery.vercel.app';
 // Construct the redirect_uri
-const REDIRECT_URI = `${baseUrl}/callback`;
+const REDIRECT_URI = isLocal ? `${baseUrl}/callback` : process.env.REDIRECT_URI;
 
 
 // serve static files with express.static
