@@ -14,11 +14,8 @@ dotenv.config({ path: './.env' });
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
-const isLocal = process.env.NODE_ENV === 'development';
-// Define the base URL based on the environment
-const baseUrl = isLocal ? 'http://localhost:3000' : 'https://lainecedes-gallery.vercel.app';
 // Construct the redirect_uri
-const REDIRECT_URI = isLocal ? `${baseUrl}/callback` : process.env.REDIRECT_URI;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 console.log(REDIRECT_URI);
 
 
@@ -49,7 +46,7 @@ const generateRandomString = (length) => {
 
 var stateKey = 'spotify_auth_state';
 
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
     // Check if access token already exists in cookie
     if (req.cookies && req.cookies.access_token) {
       // Access token exists, perform appropriate action (e.g., redirect to a different route)
@@ -75,7 +72,7 @@ app.get('/', (req, res) => {
 });
 
 // Login page
-app.get('/login', (req, res) => { 
+app.get('/', (req, res) => { 
   res.render('login', { });
 });
 
@@ -247,11 +244,14 @@ app.get('/profile', (req, res) => {
         ])
         .then(axios.spread((userProfileResponse, tracksResponse) => {
             const userProfileData = userProfileResponse.data;
-            const tracksData = tracksResponse.data;
+            const trackData = tracksResponse.data;
 
-            console.log(userProfileData, tracksData);
+            const imageUrl = trackData.items.map(item => item.album.images[0].url);
 
-            res.render('profile', { userProfileData, tracksData });
+            console.log(imageUrl);
+            console.log(userProfileData, trackData);
+
+            res.render('profile', { userProfileData, trackData, imageUrl });
         }))
         .catch(error => {
             // Check if the error status code indicates unauthorized access
@@ -266,10 +266,6 @@ app.get('/profile', (req, res) => {
             res.status(500).send('Error fetching user data from Spotify');
         });
 });
-
-
-
-
 
 
 // Start server

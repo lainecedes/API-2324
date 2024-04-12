@@ -12,14 +12,15 @@
     box-sizing: border-box;
 }
 
-h1 {
-  display: flex;
-  justify-content: center;
+:root {
+  --spotify-green: #1DB954;
+  --white: #FFFFFF;
+  --black: #191414;
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
-  background-color: #1a1a1a;
-  color: #fff;
-}
-
+    font-family: "DM Sans", sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+  }
+  
