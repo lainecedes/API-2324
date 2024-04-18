@@ -1,26 +1,63 @@
-h1 {
-    display: flex;
-    justify-content: center;
-    margin: 1em 0 1em 0;
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
+
+/* Fixed header styling */
+
+header {
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 5em;
+    z-index: 20;
+    margin: 0 1em 0 1em;
+    width: 97%;
+}
+
+header h1 {
+    align-self: center;
+}
+
+.recommendedToggle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+
+    & p {
+        display: flex;
+        z-index: 15;
+    }
+}
+
 
 /* Profile card? */
 .profile-card {
     display: flex;
+    position: fixed;
     flex-direction: column;
     border: 1px solid black; 
     padding: 1em;
-    width: 100%;
+    width: 50%;
+    z-index: 10;
 
-    grid-row: 3;
-    grid-column: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* grid-row: 3;
+    grid-column: 3; */
 
     & h2 {
         font-size: 1.2em;
     }
 
     & img {
-        width: 45%;
+        width: 40%;
         border-radius: 50%;
     }
 
@@ -63,19 +100,7 @@ h1 {
 /* Toggle switch to switch data */
 /* ---------------------------- */
 
-section:nth-of-type(2) {
-    display: flex;
-    justify-content: center;
-    margin: 3em;
-    gap: 1em;
-
-    & p {
-        display: flex;
-        align-items: center;
-    }
-}
-
-.themeButton {
+.toggleButton {
     width: 60px;
     height: 30px;
     background-color: #ccc;
@@ -83,9 +108,10 @@ section:nth-of-type(2) {
     border-radius: 1.2em;
     cursor: pointer;
     position: relative;
+    z-index: 15;
 }
 
-.themeButton::before {
+.toggleButton::before {
     content: '';
     position: absolute;
     width: 1.8em;
@@ -118,6 +144,7 @@ li:nth-of-type(1)  {
 li:nth-of-type(2)  {
     grid-row: 3;
     grid-column: 5;
+    width: 150%;
 }
 
 li:nth-of-type(3) {
@@ -131,13 +158,14 @@ li:nth-of-type(4) {
 }
 
 li:nth-of-type(5) {
-    grid-row: 2;
-    grid-column: 3;
+    grid-row: 3;
+    grid-column: 2;
 }
 
 li:nth-of-type(6) {
     grid-row: 4;
     grid-column: 3;
+    width: 150%;
 }
 
 li:nth-of-type(7) {
@@ -146,11 +174,17 @@ li:nth-of-type(7) {
 }
 
 li:nth-of-type(8) {
-    grid-row: 1;
+    grid-row: 2;
     grid-column: 4;
 }
 
 li:nth-of-type(9) {
     grid-row: 1;
     grid-column: 5;
+}
+
+li:nth-of-type(10) {
+    grid-row: 1;
+    grid-column: 2;
+    width: 150%;
 }

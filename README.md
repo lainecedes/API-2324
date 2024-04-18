@@ -73,3 +73,4 @@ De lijst is eindeloos, laat je vooral inspireren op de overzichtspagina van [MDN
 ## Sources
 [Authorizaton Flow - Spotify Web API](https://developer.spotify.com/documentation/web-api/tutorials/code-flow)
 https://developer.spotify.com/documentation/web-api/concepts/authorization
+https://tympanus.net/codrops/2022/05/31/scroll-animation-ideas-for-image-grids/

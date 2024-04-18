@@ -214,6 +214,17 @@ app.get('/refresh_token', (req, res) => {
 const userProfileEndpoint = 'https://api.spotify.com/v1/me';
 const tracksEndpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10';
 
+const topTracksIds = [
+  '51uRkSahJICiVwrPe7GgzY',
+  '2586qpfMle1fZxOkzffOjU',
+  '3hQSct6Ay5azm9dfFxHixY',
+  '64Kw68jjKqqYK5hQrCkrVT',
+  '1SySDyIJAX3XsI4UVc5hOZ'
+];
+const seedTracks = topTracksIds.join(',');
+const recommendationsEndpoint = `https://api.spotify.com/v1/recommendations?limit=10&seed_tracks=${seedTracks}`;
+
+
 // Profile page with data
 app.get('/profile', (req, res) => {
     // Retrieve access token from cookie
@@ -225,6 +236,7 @@ app.get('/profile', (req, res) => {
         res.redirect('/login');
         return;
     }
+
 
     // For some reason I can't bundle this in 1 get request, this needs to be seperate otherwise I get issues with authorization access token
     axios.all([
@@ -240,18 +252,27 @@ app.get('/profile', (req, res) => {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }
-            })
+            }),
+
+            // top 10 recommendations
+            axios.get(recommendationsEndpoint, {
+              headers: {
+                  'Authorization': `Bearer ${accessToken}`
+              }
+          })
         ])
-        .then(axios.spread((userProfileResponse, tracksResponse) => {
+        .then(axios.spread((userProfileResponse, tracksResponse, recommendedResponse) => {
             const userProfileData = userProfileResponse.data;
             const trackData = tracksResponse.data;
+            const recommendedData = recommendedResponse.data;
 
             const imageUrl = trackData.items.map(item => item.album.images[0].url);
 
             console.log(imageUrl);
-            console.log(userProfileData, trackData);
+            console.log(trackData.items.id);
 
-            res.render('profile', { userProfileData, trackData, imageUrl });
+            res.render('profile', { userProfileData, trackData, imageUrl, recommendedData });
+            
         }))
         .catch(error => {
             // Check if the error status code indicates unauthorized access
@@ -265,6 +286,7 @@ app.get('/profile', (req, res) => {
             console.error('Error fetching user data from Spotify:', error);
             res.status(500).send('Error fetching user data from Spotify');
         });
+
 });
 
 
