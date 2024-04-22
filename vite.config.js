@@ -15,7 +15,7 @@ export default defineConfig({
     emptyOutDir: false,
     outDir: path.resolve(__dirname, 'dist'), // dist directory for the vite build?
     rollupOptions: {
-      input: path.resolve(__dirname, '/scripts/index.js'),
+      input: path.resolve(__dirname, 'src/scripts/index.js'),
     },
     define: {
       'process.env.PORT': JSON.stringify(process.env.PORT),
