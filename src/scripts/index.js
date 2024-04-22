@@ -1,8 +1,9 @@
+// eslint-disable-next-line no-undef
 console.log(recommendedData);
 
 const toggleButton = document.getElementById('toggleButton');
 
-function toggleSwitch() {
+function toggleSwitch () {
     var button = document.getElementById('toggleButton');
     button.classList.toggle('active');
 
@@ -18,7 +19,7 @@ const covers = document.querySelectorAll('.recommendedCover');
 const audio = new Audio();
 
 // Function to play or pause the audio preview
-function toggleAudioPreview(previewUrl) {
+function toggleAudioPreview (previewUrl) {
     if (audio.paused || audio.src !== previewUrl) {
         // If audio is paused or the preview URL has changed, play the audio
         audio.src = previewUrl;
@@ -51,59 +52,7 @@ toggleButton.addEventListener('click', function () {
 });
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Get the playlist button element
-    const playlistButton = document.getElementById('playlistButton');
-
-    // Add click event listener to the playlist button
-    playlistButton.addEventListener('click', function(event) {
-        // Prevent the default behavior of the button (e.g., form submission)
-        event.preventDefault();
-
-        // Send a POST request to the /profile endpoint
-        fetch('/profile', {
-            method: 'POST',
-            credentials: 'same-origin', // Include cookies in the request
-            headers: {
-                'Content-Type': 'application/json' // Specify the content type of the request body
-            }
-        })
-        .then(response => {
-            // Check if the response status is in the success range
-            if (response.ok) {
-                // Parse the response JSON data
-                return response.json();
-            } else {
-                // Log the error if the response status is not in the success range
-                console.error('Error:', response.statusText);
-            }
-        })
-        .then(data => {
-            // Log the data received from the server for debugging
-            console.log('Server Response:', data);
-            
-            // Use the Web Share API to share the generated playlist link
-            if (navigator.share) {
-                // Share the playlist link using the Web Share API
-                navigator.share({
-                    title: 'Check out my recommended playlist!',
-                    url: data.playlistLink
-                })
-                .then(() => console.log('Shared successfully'))
-                .catch(error => console.error('Error sharing:', error));
-            } else {
-                // Web Share API is not supported, handle accordingly
-                console.error('Web Share API is not supported');
-            }
-        })
-        .catch(error => {
-            // Log any network errors
-            console.error('Error:', error);
-        });
-    });
-});
-
-
+const playlistButton = document.getElementById('playlistButton');
 
 
 

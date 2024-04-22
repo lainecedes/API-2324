@@ -79,6 +79,11 @@ Met dit had ik dus 3 aparte API fetch calls gemaakt (userProfile, Tracks en Reco
 Van 1 axios all array met 3 calls (userProfile, tracksData, recommendationsData), naar 1 axios all array met 2 calls (userProfile, tracksData), en als de response van beide oke is, dat hij daarna pas de call van recommendationsData kan doen. Hier had ik dan tijdens de eerste call dus al de ID data, en kon ik dit in een variable zetten en weer een call maken zonder dat hij een error geeft.
 
 
+## Wat nog meer
+create playlist functie maken van spotify, in een andere route, als je op /profile op de button klikt dan krijg je dus een playlist en dat het is toegevoegd. Ik had een string gemaakt met de id van de playlist en wilde die meegeven naar de client side, en daar een post request te maken, alleen kreeg ik dua niet alleen de string mee maar het hele document. 
+
+Met wat advies was het dus beter om gewoon deze functie af te handelen in mijn /profile route, en een form submission te maken waardoor ik deze waardes meegeef als een query parameter
+
 
 
 ## Resources

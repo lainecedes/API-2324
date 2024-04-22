@@ -218,135 +218,129 @@ const tracksEndpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=shor
 
 const sharedIds = {};
 
-// Profile page with data
+// Profile page route with form
 app.get('/profile', (req, res) => {
-    // Retrieve access token from cookie
-    const accessToken = req.cookies.access_token;
-
-    if (!accessToken) {
-        // If access token is not present in the cookie, redirect to login or handle accordingly
-        console.log('Access token not present in cookie!');
-        res.redirect('/login');
-        return;
-    }
-
-    // Fetch user profile data, top tracks, and recommendations
-    axios.all([
-            axios.get(userProfileEndpoint, {
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            }),
-            axios.get(tracksEndpoint, {
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            })
-        ])
-        .then(axios.spread((userProfileResponse, tracksResponse) => {
-            const userProfileData = userProfileResponse.data;
-            const trackData = tracksResponse.data;
-            // console.log(trackData);
-
-            const imageUrl = trackData.items.map(item => item.album.images[0].url);
-            const trackIds = trackData.items.map(track => track.id);
-            sharedIds.trackIds = trackIds.slice(0, 5);
-
-            // sharedIds.trackIds is populated, make recommendationsEndpoint call after
-            const recommendationsEndpoint = `https://api.spotify.com/v1/recommendations?limit=10&seed_tracks=${sharedIds.trackIds.join(',')}`;
-
-            // Fetch recommendations data
-            return axios.get(recommendationsEndpoint, {
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            })
-            .then(recommendedResponse => {
-                const recommendedData = recommendedResponse.data;
-                const recommendedUrl = recommendedData.tracks.map(track => track.album.images[0].url);
-
-                // Dynamic spotify URI's
-                const recommendedUris = recommendedData.tracks.map(track => track.uri);
-                console.log(recommendedUris);
-
-                // Render profile page with retrieved data
-                res.render('profile', {
-                    userProfileData,
-                    trackData,
-                    imageUrl,
-                    recommendedData,
-                    recommendedUrl
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching recommendations data:', error);
-                res.status(500).send('Error fetching recommendations data');
-            });
-        }))
-        .catch(error => {
-            // Check if the error status code indicates unauthorized access
-            if (error.response && error.response.status === 401) {
-                // If access token is invalid, clear the access token cookie
-                res.clearCookie('access_token');
-                console.log('Access token invalid, cookie cleared, redirect to login');
-                res.redirect('/login');
-                return;
-            }
-            console.error('Error fetching user profile data:', error);
-            res.status(500).send('Error fetching user profile data');
-        });
-});
-
-// profile page route post
-app.post('/profile', (req, res) => {
   // Retrieve access token from cookie
   const accessToken = req.cookies.access_token;
 
   if (!accessToken) {
-      // If access token is not present, return an error
+      // If access token is not present in the cookie, redirect to login or handle accordingly
+      console.log('Access token not present in cookie!');
+      res.redirect('/login');
+      return;
+  }
+
+  // Fetch user profile data, top tracks, and recommendations
+  axios.all([
+          axios.get(userProfileEndpoint, {
+              headers: {
+                  'Authorization': `Bearer ${accessToken}`
+              }
+          }),
+          axios.get(tracksEndpoint, {
+              headers: {
+                  'Authorization': `Bearer ${accessToken}`
+              }
+          })
+      ])
+      .then(axios.spread((userProfileResponse, tracksResponse) => {
+          const userProfileData = userProfileResponse.data;
+          const trackData = tracksResponse.data;
+          // console.log(trackData);
+
+          const imageUrl = trackData.items.map(item => item.album.images[0].url);
+          const trackIds = trackData.items.map(track => track.id);
+          sharedIds.trackIds = trackIds.slice(0, 5);
+
+          // sharedIds.trackIds is populated, make recommendationsEndpoint call after
+          const recommendationsEndpoint = `https://api.spotify.com/v1/recommendations?limit=10&seed_tracks=${sharedIds.trackIds.join(',')}`;
+
+          // Fetch recommendations data
+          return axios.get(recommendationsEndpoint, {
+              headers: {
+                  'Authorization': `Bearer ${accessToken}`
+              }
+          })
+          .then(recommendedResponse => {
+              const recommendedData = recommendedResponse.data;
+              const recommendedUrl = recommendedData.tracks.map(track => track.album.images[0].url);
+
+              // Dynamic spotify URI's
+              const recommendedUris = recommendedData.tracks.map(track => track.uri);
+              // console.log(recommendedUris);
+              // console.log(recommendedData);
+
+              // Render profile page with retrieved data and the form
+              res.render('profile', {
+                  userProfileData,
+                  trackData,
+                  imageUrl,
+                  recommendedData,
+                  recommendedUrl,
+                  recommendedUris // recommendedUris for form submit
+              });
+          })
+          .catch(error => {
+              console.error('Error fetching recommendations data:', error);
+              res.status(500).send('Error fetching recommendations data');
+          });
+      }))
+      .catch(error => {
+          // Check if the error status code indicates unauthorized access
+          if (error.response && error.response.status === 401) {
+              // If access token is invalid, clear the access token cookie
+              res.clearCookie('access_token');
+              console.log('Access token invalid, cookie cleared, redirect to login');
+              res.redirect('/login');
+              return;
+          }
+          console.error('Error fetching user profile data:', error);
+          res.status(500).send('Error fetching user profile data');
+      });
+});
+
+
+// Make playlist and form submission
+app.post('/createPlaylist', (req, res) => {
+  // access token cookie
+  const accessToken = req.cookies.access_token;
+  // recommended track URIs from the form data
+  const recommendedUris = JSON.parse(req.body.recommendedUris);
+
+  if (!accessToken) {
       res.status(401).send('Access token not provided');
       return;
   }
 
-  // Define recommendationsEndpoint within the POST route handler
-  const recommendationsEndpoint = `https://api.spotify.com/v1/recommendations?limit=10&seed_tracks=${sharedIds.trackIds.join(',')}`;
-
-  // Fetch recommendations data again (you may optimize this if you already have the data)
-  axios.get(recommendationsEndpoint, {
-          headers: {
-              'Authorization': `Bearer ${accessToken}`
-          }
-      })
-      .then(recommendedResponse => {
-          const recommendedData = recommendedResponse.data;
-          const recommendedUris = recommendedData.tracks.map(track => track.uri);
-
-          // Create playlist with recommended tracks
-          createPlaylist(accessToken, recommendedUris)
-              .then(createdPlaylist => {
-                  // Pass playlistLink along with other data to profile template
-                  res.render('profile', {
-                      userProfileData,
-                      trackData,
-                      imageUrl,
-                      recommendedData,
-                      recommendedUrl,
-                      playlistLink: createdPlaylist.playlistLink
-                  });
-              })
-              .catch(error => {
-                  console.error('Error creating playlist:', error);
-                  res.status(500).send('Error creating playlist');
-              });
+  // Create playlist with recommended tracks
+  createPlaylist(accessToken, recommendedUris)
+      .then(createdPlaylist => { 
+          const playlistUrl = createdPlaylist.playlist.external_urls.spotify;
+          const playlistID = createdPlaylist.playlist.id;
+          console.log('testing url:', playlistUrl);
+          console.log('testing url id:', playlistID);
+          // new: redirect to the playlist-added page with playlist data as query parameters
+          res.redirect(`/playlist-added?playlistUrl=${encodeURIComponent(playlistUrl)}&playlistID=${encodeURIComponent(playlistID)}`);
       })
       .catch(error => {
-          console.error('Error fetching recommendations data:', error);
-          res.status(500).send('Error fetching recommendations data');
+          console.error('Error creating playlist:', error);
+          res.status(500).send('Error creating playlist');
       });
 });
 
+// Route for rendering playlist added page
+app.get('/playlist-added', (req, res) => {
+  // Retrieve playlist data from query parameters
+  const playlistUrl = req.query.playlistUrl;
+  const playlistID = req.query.playlistID;
+
+  // Render the playlist-added page with playlist data
+  res.render('playlist-added', { playlistUrl, playlistID });
+});
+
+
 // Function to create playlist and return playlist and playlist link
-function createPlaylist (accessToken, recommendedUris) {
+async function createPlaylist (accessToken, recommendedUris) {
   const createPlaylistEndpoint = 'https://api.spotify.com/v1/me/playlists';
 
   return axios.post(createPlaylistEndpoint, {
@@ -371,11 +365,7 @@ function createPlaylist (accessToken, recommendedUris) {
                   }
               })
               .then(() => {
-                  // Construct the playlist link
-                  const playlistLink = `https://open.spotify.com/playlist/${playlist.id}`;
-                  console.log(playlistLink);
-                  // Return an object containing both playlist and playlist link
-                  return { playlist, playlistLink };
+                  return { playlist } ;
               });
       });
 }
