@@ -4,7 +4,7 @@
     <%- include ('partials/head.ejs'); %>
     <link rel="stylesheet" href="/styles/general.css">
     <link rel="stylesheet" href="/styles/index.css">
-    <title>Login - Music Gallery</title>
+    <title>Your new added playlist - Music Gallery</title>
 </head>
 
 <body>
@@ -23,9 +23,8 @@
     <script>
         document.getElementById('shareButton').addEventListener('click', async () => {
             try {
-                // Check if the Web Share API is supported
+                // Check if the Web Share API is supported (test with Firefox and Safari)
                 if (navigator.share) {
-                    // Share the playlist URL
                     await navigator.share({
                         title: 'Check out my recommended playlist made with Music Gallery!',
                         url: '<%= playlistUrl %>'
@@ -40,6 +39,7 @@
         });
     </script>
 
+    <!-- Lenis, gsap, gsap scrollTrigger-->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 

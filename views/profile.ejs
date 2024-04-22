@@ -33,9 +33,9 @@
             <!-- cover grids -->
             <div class="grid-container">
                 <ul class="grid" id="imageGrid">
-                    <% imageUrl.forEach(cover => { %>
+                    <% imageUrl.forEach((cover, index)=> { %>
                         <li>
-                            <img class="covers" src="<%= cover %>" alt="Image">
+                            <img class="covers" src="<%= cover %>" alt="Image" data-preview-url="<%= trackData.items[index].preview_url %>">
                         </li>
                     <% }); %>
                 </ul>
@@ -67,30 +67,15 @@
                 </ul>
             </div>
 
-            <!-- profile.ejs: Loop through recommendedUris to display each track URI -->
-            <!-- <% recommendedUris.forEach(uri => { %>
-                <p><%= uri %></p>
-            <% }); %> -->
 
-
-            <!-- profile.ejs: Add a form with a hidden input field and a button -->
+            <!-- form with hidden input field of recommendedUris -->
             <form action="/createPlaylist" method="POST">
-                <!-- Store recommended track URIs in a hidden input field -->
                 <input type="hidden" name="recommendedUris" value="<%= JSON.stringify(recommendedUris) %>">
-                <!-- Add a button to trigger form submission -->
                 <button type="submit">Create Playlist</button>
             </form>
 
-            <!-- <button id="playlistButton">Add Playlist to Spotify</button> -->
         </section>
     </main>
-
-    <script>
-        var recommendedData = <%- JSON.stringify(recommendedData) %> 
-    </script>
-
-    <!-- axios server side code  -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- Lenis, gsap, gsap scrollTrigger-->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>

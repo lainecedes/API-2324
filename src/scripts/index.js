@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-undef
-console.log(recommendedData);
-
+// Toggle button at the top of the header
 const toggleButton = document.getElementById('toggleButton');
 
 function toggleSwitch () {
@@ -9,33 +7,46 @@ function toggleSwitch () {
 
     const playlistSection = document.querySelector('section:nth-of-type(3)');
     playlistSection.classList.toggle('showSection');
-
 }
 
-// Select all the image covers
-const covers = document.querySelectorAll('.recommendedCover');
+// Add event listener for the click event
+toggleButton.addEventListener('click', function () {
+    toggleSwitch();
+});
 
-// Create an audio element
+
+
+
+// Select all the RECOMMENDED image covers and play the previewUrl covers
+// Only RECOMMENDED covers (those in the playlist)
+const recommendedCovers = document.querySelectorAll('.recommendedCover');
+const topTracksCovers = document.querySelectorAll('.covers');
 const audio = new Audio();
 
 // Function to play or pause the audio preview
 function toggleAudioPreview (previewUrl) {
     if (audio.paused || audio.src !== previewUrl) {
-        // If audio is paused or the preview URL has changed, play the audio
         audio.src = previewUrl;
         audio.play();
     } else {
-        // If audio is playing and the preview URL matches, pause the audio
         audio.pause();
     }
 }
 
-// Add click event listeners to the image covers
-covers.forEach(cover => {
+recommendedCovers.forEach(cover => {
     cover.addEventListener('click', () => {
         // preview URL from data-preview-url 
         const previewUrl = cover.getAttribute('data-preview-url');
         // toggle play/pause audio
+        toggleAudioPreview(previewUrl);
+    });
+});
+
+topTracksCovers.forEach(cover => {
+    cover.addEventListener('click', () => {
+        // Get the preview URL from data-preview-url attribute
+        const previewUrl = cover.getAttribute('data-preview-url');
+        // Toggle play/pause audio
         toggleAudioPreview(previewUrl);
     });
 });
@@ -46,16 +57,11 @@ audio.addEventListener('ended', () => {
 });
 
 
-// Add event listener for the click event
-toggleButton.addEventListener('click', function () {
-    toggleSwitch();
-});
-
-
-const playlistButton = document.getElementById('playlistButton');
 
 
 
+
+// GSAP AND LENIS STYLING
 // Lenis setup on github https://github.com/studio-freight/lenis
 const lenis = new Lenis();
 lenis.on('scroll', (e) => {
@@ -72,7 +78,6 @@ gsap.ticker.lagSmoothing(0);
 
 
 // gsap styling for the image covers
-
 const gridCovers = document.querySelectorAll('.grid li');
 if (gridCovers) {
 

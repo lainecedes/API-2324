@@ -154,7 +154,8 @@ header h1 {
 }
 
 section:nth-of-type(3) {
-    /* display: none;  */
+    /* turn display:none off for styling */
+    display: none; 
     transition: opacity 0.3s ease;
     position: relative;
     z-index: 200;
