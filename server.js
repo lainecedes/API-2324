@@ -317,10 +317,13 @@ app.post('/createPlaylist', (req, res) => {
       .then(createdPlaylist => { 
           const playlistUrl = createdPlaylist.playlist.external_urls.spotify;
           const playlistID = createdPlaylist.playlist.id;
+          const playlistUri = createdPlaylist.playlist.uri;
           console.log('testing url:', playlistUrl);
           console.log('testing url id:', playlistID);
+
+          console.log(playlistUri);
           // new: redirect to the playlist-added page with playlist data as query parameters
-          res.redirect(`/playlist-added?playlistUrl=${encodeURIComponent(playlistUrl)}&playlistID=${encodeURIComponent(playlistID)}`);
+          res.redirect(`/playlist-added?playlistUrl=${encodeURIComponent(playlistUrl)}&playlistID=${encodeURIComponent(playlistID)}&playlistUri=${encodeURIComponent(playlistUri)}`);
       })
       .catch(error => {
           console.error('Error creating playlist:', error);
@@ -333,9 +336,10 @@ app.get('/playlist-added', (req, res) => {
   // Retrieve playlist data from query parameters
   const playlistUrl = req.query.playlistUrl;
   const playlistID = req.query.playlistID;
+  const playlistUri = req.query.playlistUri;
 
   // Render the playlist-added page with playlist data
-  res.render('playlist-added', { playlistUrl, playlistID });
+  res.render('playlist-added', { playlistUrl, playlistID, playlistUri });
 });
 
 

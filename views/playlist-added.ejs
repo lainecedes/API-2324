@@ -3,7 +3,7 @@
 <head>
     <%- include ('partials/head.ejs'); %>
     <link rel="stylesheet" href="/styles/general.css">
-    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/playlist-added.css">
     <title>Your new added playlist - Music Gallery</title>
 </head>
 
@@ -11,13 +11,17 @@
     <main>
         <h1>Music Gallery</h1>
         <section>
-            <p>Playlist added!</p>
+            <h2>Your playlist was added to your Spotify account!</h2>
             <p>Share your playlist with friends and family here: </p>
             <button id="shareButton">Share Playlist</button>
-            <h1>Playlist Added</h1>
-            <p>Playlist URL: <%= playlistUrl %></p>
-            <p>Playlist ID: <%= playlistID %></p>
+
+            <div id="embed-iframe"></div>
         </section>
+        <footer>
+            <p>Spotify Playlist ID: <%= playlistID %></p>
+            <p>This website uses the Spotify API to show top tracks and create recommended playlists. </p>
+            <p>&copy; 2024 Elaine Wilberforce </p>
+        </footer>
     </main>
 
     <script>
@@ -26,7 +30,8 @@
                 // Check if the Web Share API is supported (test with Firefox and Safari)
                 if (navigator.share) {
                     await navigator.share({
-                        title: 'Check out my recommended playlist made with Music Gallery!',
+                        title: 'Top Recommendations nby Music Gallery',
+                        text: 'Check out my recommended playlist made with Music Gallery!',
                         url: '<%= playlistUrl %>'
                     });
                     console.log('Playlist shared successfully!');
@@ -37,6 +42,23 @@
                 console.error('Error sharing playlist:', error);
             }
         });
+    </script>
+
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+
+    <script>
+        // spotify iframe code
+        window.onSpotifyIframeApiReady = (IFrameAPI) => {
+            // delay for loading full embed block
+            setTimeout(() => {
+                const element = document.getElementById('embed-iframe');
+                const options = {
+                    uri: '<%= playlistUri %>'
+                };
+                const callback = (EmbedController) => {};
+                IFrameAPI.createController(element, options, callback);
+            }, 2000); // 1000 ms
+    };      
     </script>
 
     <!-- Lenis, gsap, gsap scrollTrigger-->

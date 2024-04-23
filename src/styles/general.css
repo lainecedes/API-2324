@@ -14,13 +14,23 @@
 
 :root {
   --spotify-green: #1DB954;
+  --neon-pink: #f72585;
   --white: #FFFFFF;
   --black: #191414;
+  --purple: #7209b7;
+  --dark-blue: #3a0ca3;
+  --turquoise: #4cc9f0;
 }
 
 body {
     font-family: "DM Sans", sans-serif;
     background-color: var(--black);
     color: var(--white);
-  }
+}
+
+button {
+  font-family: "DM Sans", sans-serif;
+}
+
+
   
