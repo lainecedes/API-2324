@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import eslint from 'vite-plugin-eslint';
 import path from 'node:path';
 const __dirname = import.meta.dirname;
 import dotenv from 'dotenv';
@@ -8,7 +7,7 @@ dotenv.config(); // Load environment variables from .env file
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [eslint({ exclude: ['**/node_modules/**', '**/dist/**', '**/*.min.*'] })],
+  plugins: [],
   build: {
     minify: false,
     manifest: true,
