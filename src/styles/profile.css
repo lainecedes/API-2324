@@ -51,24 +51,26 @@ header h1 {
     display: flex;
     position: fixed;
     flex-direction: column;
-    border: 1px solid black; 
-    padding: 1em;
-    width: 50%;
-    z-index: 10;
 
+    border: 2px solid black; 
+    border-radius: 2em;
+
+    backdrop-filter: blur(10px);
+    padding: 1em;
+    width: 30%;
+    z-index: 10;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    /* grid-row: 3;
-    grid-column: 3; */
 
     & h2 {
         font-size: 1.2em;
     }
 
     & img {
-        width: 40%;
+        width: 70%;
+        margin-bottom: 1em;
         border-radius: 50%;
     }
 
@@ -157,11 +159,12 @@ section:nth-of-type(3) {
     /* turn display:none off for styling */
     display: none; 
     transition: opacity 0.3s ease;
-    position: relative;
+    position: sticky;
     z-index: 200;
     top: -20em;
     background-color: beige;
     color: black;
+    padding-top: 3em;
 
     & .showSection {
         display: block;
@@ -179,8 +182,16 @@ section:nth-of-type(3).showSection {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 4em;
 }
 
+.recommended h2 {
+    font-size: 3em;
+}
+
+.recommended p {
+    font-size: 1.5em;
+}
 
 
 
@@ -293,8 +304,14 @@ section:nth-of-type(3).showSection {
 
 .recommendedCover:hover {
     width: 25%;
-    border: 1em solid red;
+    border: 1em solid var(--purple);
     transition: width 0.3s ease;
+}
+.recommendedCover.active {
+    width: 25%;
+    border: 1em solid var(--purple);
+    transition: width 0.3s ease;
+
 }
 
 .recommendedCover.playing {
@@ -308,3 +325,62 @@ section:nth-of-type(3).showSection {
     75% { text-shadow: rebeccapurple 0 0 10px;}
     100% { text-shadow: #48abe0 0 0 10px; }
    }
+
+
+.information {
+    position: relative;
+    bottom: -100%;
+    right: 15%; 
+    width: 40ch;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    transition: bottom 0.3s ease-in-out;
+    padding: 10px;
+    box-sizing: border-box;
+    transform: translateX(-100%);
+}
+
+.grid li {
+    position: relative;
+    overflow: hidden;
+}
+
+.grid li:hover .information {
+    bottom: 0;
+}
+
+.information div p {
+    white-space: pre-line;
+}
+
+form button {
+    font-size: 1.2em;
+    text-decoration: none;
+    color: inherit;
+    background-color: var(--neon-pink);
+    white-space: nowrap;
+    padding: 1em;
+    border-radius: 2em;
+    width: 9em;
+    border: none;
+    cursor: pointer;
+    transition: background-position 0.5s ease;
+    background-image: linear-gradient(-45deg, var(--neon-pink), var(--purple), var(--dark-blue), var(--turquoise));
+    background-size: 500% 500%;
+  }
+
+ form button:hover {
+      font-weight: 700;
+      transform: scale(1.15);
+      transition: all 0.2s ease-out;
+      background-position: 100% 100%;
+  }
+
+form button:active, button:focus {
+      border: 0.2em solid var(--white);
+}
+form {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 4em;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('partials/head.ejs'); %>
+    <link rel="stylesheet" href="/styles/general.css">
+    <link rel="stylesheet" href="/styles/index.css">
+    <title>Login - Music Gallery</title>
+</head>
+
+<body>
+    <main>
+        <h1>Music Gallery</h1>
+
+        <!-- detail_page.ejs -->
+        <section>
+            <div class="track-info">
+                <h2>Track Details</h2>
+                <p>Preview URL: <%= previewUrl %></p>
+                <p>Track Name: <%= trackData.items.map(track => track.name) %></p>
+
+            </div>
+        </section>
+
+
+
+        <footer>
+            <p>This website uses the Spotify API to show top tracks and create recommended playlists. </p>
+            <p>&copy; 2024 Elaine Wilberforce </p>
+        </footer>
+    </main>
+
+    <!-- Lenis, gsap, gsap scrollTrigger-->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script> 
+    <script defer="" src="/scripts/login.js"></script>
+</body>
+</html>

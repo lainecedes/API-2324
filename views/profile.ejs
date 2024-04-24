@@ -36,13 +36,20 @@
                     <% imageUrl.forEach((cover, index)=> { %>
                         <li>
                             <img class="covers" src="<%= cover %>" alt="Image" data-preview-url="<%= trackData.items[index].preview_url %>">
+                            <div class="information">
+                                <div>
+                                    <p><%= trackData.items[index].name %> </p>
+                                    <p>by</p>
+                                    <p><%= trackData.items[index].artists.map(artist => artist.name).join(', ') %></p>
+                                </div>
+                            </div>
                         </li>
                     <% }); %>
                 </ul>
              </div>
         </section>
 
-
+    
         <section>
             <div class="recommended">
                 <h2>Your recommended playlist</h2>
@@ -67,7 +74,6 @@
                 </ul>
             </div>
 
-
             <!-- form with hidden input field of recommendedUris -->
             <form action="/createPlaylist" method="POST">
                 <input type="hidden" name="recommendedUris" value="<%= JSON.stringify(recommendedUris) %>">
@@ -75,6 +81,7 @@
             </form>
 
         </section>
+
     </main>
 
     <!-- Lenis, gsap, gsap scrollTrigger-->

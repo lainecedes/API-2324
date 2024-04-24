@@ -16,7 +16,6 @@ toggleButton.addEventListener('click', function () {
 
 
 
-
 // Select all the RECOMMENDED image covers and play the previewUrl covers
 // Only RECOMMENDED covers (those in the playlist)
 const recommendedCovers = document.querySelectorAll('.recommendedCover');
@@ -57,7 +56,13 @@ audio.addEventListener('ended', () => {
 });
 
 
-
+// Loop through each .recommendedCover element
+recommendedCovers.forEach(function(recommendedCover) {
+    // Add click event listener to toggle the 'active' class
+    recommendedCover.addEventListener('click', function() {
+        this.classList.toggle('active');
+    });
+});
 
 
 
@@ -79,9 +84,8 @@ gsap.ticker.lagSmoothing(0);
 
 // gsap styling for the image covers
 const gridCovers = document.querySelectorAll('.grid li');
+
 if (gridCovers) {
-
-
 const mm = gsap.matchMedia();
 mm.add('(prefers-reduced-motion: no-preference)', () => {
 
@@ -119,6 +123,8 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
         }, 'start');
     });
 });
+
+
 
 // gsap.to(gridCovers, {
 //     scrollTrigger: {

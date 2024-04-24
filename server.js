@@ -246,10 +246,12 @@ app.get('/profile', (req, res) => {
       .then(axios.spread((userProfileResponse, tracksResponse) => {
           const userProfileData = userProfileResponse.data;
           const trackData = tracksResponse.data;
-          // console.log(trackData);
+          console.log(trackData);
+
 
           const imageUrl = trackData.items.map(item => item.album.images[0].url);
           const trackIds = trackData.items.map(track => track.id);
+
           sharedIds.trackIds = trackIds.slice(0, 5);
 
           // sharedIds.trackIds is populated, make recommendationsEndpoint call after
