@@ -205,7 +205,7 @@ I also have a new web app now that's actually worth showcasing. This is going to
 - [Other Web API's by Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/API).
 - [Authorizaton Code Flow Tutorial - Spotify for Developers](https://developer.spotify.com/documentation/web-api/tutorials/code-flow)
 - [Authorization Information | Spotify for Developers](https://developer.spotify.com/documentation/web-api/concepts/authorization)
--[Scroll Animation Ideas for Image Grids - Tympanus/Codrops](https://tympanus.net/codrops/2022/05/31/scroll-animation-ideas-for-image-grids/)
+- [Scroll Animation Ideas for Image Grids - Tympanus/Codrops](https://tympanus.net/codrops/2022/05/31/scroll-animation-ideas-for-image-grids/)
 - [GSAP - Animation Library](https://gsap.com/docs/v3/Installation?tab=npm&module=esm&method=private+registry&tier=free&club=false&require=false&trial=true)
 - [Lenis smooth scroll by darkroom.engineering](https://lenis.darkroom.engineering/)
 - Cyd's GSAP workshop
