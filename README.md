@@ -22,7 +22,7 @@ I've worked with content API's before, such as the Nookipedia API, and these are
 
 Music Gallery is a web app where you can see your top 10 listened tracks in a month, and get random playlists based on these top 10 tracks as a recommendation to let you try out and discover different tracks that you might like! This recommended playlist can also be shared with others as a link through devices and browsers that support it.
 
-[image file here]
+<img width="1429" alt="Music Gallery Preview" src="https://github.com/lainecedes/API-2324/assets/65594330/0ac4668c-55ee-4c74-b301-da5533f226e1">
 
 ### Features
 - Authentication using your Spotify account
@@ -34,6 +34,7 @@ Music Gallery is a web app where you can see your top 10 listened tracks in a mo
 - Playlist creation with your 10 recommended tracks
 - Playlist with tracks are generated in the end with the Spotify iFrame API
 - Sharing playlist with the Web Share API, if your browser supports it (Firefox does not! I noticed.)
+
 
 #### API's and libraries used
 
@@ -112,7 +113,7 @@ Eventually I gave up (Note: Vercel also NEVER works for me for a reason) and wen
 #### Feedback week 2 - Cyd
 I showed my progress (and concept) to Cyd, and she liked the gallery styling, and it reminded her of a site that had the same styling (Codrops, Tympanus). She gave me the site as inspiration and that's where I decided to use GSAP and Lenis, because these libraries were used to make the cool effects. I was a bit scared that this also would be a huge learning curve, but I tried it out and Cyd wanted to give a workshop in the 3rd week, so no worries.
 
-concept img
+![concept_image](https://github.com/lainecedes/API-2324/assets/65594330/66621073-8374-47bb-9f1f-8c91c684ee3e)
 
 
 ### Week 3
